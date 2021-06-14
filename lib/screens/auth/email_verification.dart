@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:trade_app/screens/auth/login.dart';
-import 'package:trade_app/screens/auth/register.dart';
-import 'package:trade_app/screens/widgets/appbar_widget.dart';
-import 'package:trade_app/screens/widgets/button_widget.dart';
-import 'package:trade_app/screens/widgets/constants.dart';
-import 'package:trade_app/screens/widgets/textformfield_widget.dart';
+import 'package:trade_app/widgets/appbar_widget.dart';
+import 'package:trade_app/widgets/button_widget.dart';
+import 'package:trade_app/widgets/constants.dart';
+import 'package:trade_app/widgets/textformfield_widget.dart';
 
 class EmailVerification extends StatefulWidget {
+  static const String route = 'EmailVerification';
+
   @override
   _EmailVerificationState createState() => _EmailVerificationState();
 }
@@ -30,10 +31,12 @@ class _EmailVerificationState extends State<EmailVerification> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Center(
-                      child: SvgPicture.asset("assets/images/email_verify.svg")),
+                      child:
+                          SvgPicture.asset("assets/images/email_verify.svg")),
                   SizedBox(height: 30),
                   Text('Email Verification',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
                   SizedBox(height: 10),
                   Text(
                     ' Please confirm the Email address with a code sent to the email used in the previous stage',

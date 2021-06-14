@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:trade_app/screens/widgets/constants.dart';
+import 'package:trade_app/widgets/constants.dart';
 
 class TextFormFieldWidget extends StatelessWidget {
   final String label, hintText, suffixText;
-  final IconData iconData, prefixIconData;
-  final bool obscureText, enabled;
+  final IconData  prefixIconData;
+  final bool obscureText, enabled, iconData;
   final String initialValue;
   final TextEditingController controller;
   final Function onChanged, onSaved, onIconTap, onFieldSubmitted;
@@ -49,7 +49,7 @@ class TextFormFieldWidget extends StatelessWidget {
     return TextFormField(
       keyboardType: type,
       cursorColor: appColor,
-      decoration: iconData == null
+      decoration: iconData == false
           ? InputDecoration(
               filled: false,
               border: inputBorder,
@@ -95,11 +95,10 @@ class TextFormFieldWidget extends StatelessWidget {
                 vertical: 20,
               ),
               floatingLabelBehavior: FloatingLabelBehavior.always,
-              prefixIcon: InkWell(
+              suffixIcon: InkWell(
                 onTap: onIconTap,
                 child: Icon(prefixIconData, color: Colors.grey[500]),
               ),
-              suffixIcon: Icon(iconData, color: Colors.grey[500]),
               suffixText: suffixText ?? '',
             ),
       obscureText: obscureText,

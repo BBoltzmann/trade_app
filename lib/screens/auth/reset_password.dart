@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:trade_app/screens/auth/login.dart';
-import 'package:trade_app/screens/widgets/appbar_widget.dart';
-import 'package:trade_app/screens/widgets/button_widget.dart';
-import 'package:trade_app/screens/widgets/constants.dart';
-import 'package:trade_app/screens/widgets/textformfield_widget.dart';
+import 'package:trade_app/widgets/appbar_widget.dart';
+import 'package:trade_app/widgets/button_widget.dart';
+import 'package:trade_app/widgets/constants.dart';
+import 'package:trade_app/widgets/textformfield_widget.dart';
 
 class ResetPassword extends StatefulWidget {
+  static const String route = 'ResetPassword';
+
   @override
   _ResetPasswordState createState() => _ResetPasswordState();
 }

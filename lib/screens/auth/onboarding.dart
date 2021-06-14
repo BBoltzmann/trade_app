@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:trade_app/screens/auth/login.dart';
-import 'package:trade_app/screens/widgets/constants.dart';
+import 'package:trade_app/widgets/constants.dart';
 
 class OnboardingScreen extends StatefulWidget {
+  static const String route = 'OnboardingScreen';
+
   @override
   _OnboardingScreenState createState() => _OnboardingScreenState();
 }
