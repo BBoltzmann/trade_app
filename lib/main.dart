@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:trade_app/helpers/locator.dart';
-import 'package:trade_app/helpers/utility.dart';
 import 'package:trade_app/screens/auth/email_verification.dart';
 import 'package:trade_app/screens/auth/forgot_password.dart';
 import 'package:trade_app/screens/auth/login.dart';

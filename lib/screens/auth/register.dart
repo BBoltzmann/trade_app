@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:trade_app/controllers/user_controller.dart';
 import 'package:trade_app/helpers/utility.dart';
-import 'package:trade_app/screens/auth/email_verification.dart';
 import 'package:trade_app/widgets/appbar_widget.dart';
 import 'package:trade_app/widgets/button_widget.dart';
 import 'package:trade_app/widgets/constants.dart';
