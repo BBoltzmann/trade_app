@@ -26,6 +26,8 @@ class UserController extends ControllerMVC {
     registerFormKey = new GlobalKey<FormState>();
     this.scaffoldKey = new GlobalKey<ScaffoldState>();
     storage = getIt<FlutterSecureStorage>();
+
+    getUserProfile();
   }
 
   login() async {
@@ -34,9 +36,11 @@ class UserController extends ControllerMVC {
 
       IResponse<User> res = await user_repo.login(user);
 
+      print({'======/////////========${res.token}'});
+      print({'======/////////========${res.uuid}'});
       if (res.success == true) {
         storage.write(key: "token", value: res.token);
-        storage.write(key: "uid", value: res.data.uuid);
+        storage.write(key: "uid", value: res.uuid);
         Navigator.of(scaffoldKey?.currentContext).pushReplacementNamed(
           HomeScreen.route,
           arguments: 0,
@@ -60,6 +64,7 @@ class UserController extends ControllerMVC {
     IResponse<User> res = await user_repo.userSignUp(user);
 
     if (res.success == true) {
+      storage.write(key: "uid", value: res.uuid);
       storage.write(key: "token", value: res.token);
       storage.write(key: "firstname", value: res.data.firstname);
       storage.write(key: "firstname", value: res.data.lastname);
@@ -87,6 +92,23 @@ class UserController extends ControllerMVC {
       );
       loader.remove();
     }
+  }
+
+  Future getUserProfile() async {
+    if (!fetchingAddresses) {
+      setState(() {
+        // loader = Utility.load(scaffoldKey?.currentContext);
+        fetchingAddresses = true;
+      });
+    }
+
+    final res = await user_repo.getUserProfile();
+    setState(() {
+      fetchingAddresses = true;
+    });
+
+    print(res.data);
+    return res;
   }
 
   void togglePasswordVisibility() {
