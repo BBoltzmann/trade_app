@@ -47,7 +47,14 @@ dependencies:
   path_provider: ^2.0.2
   # Uniform Screen Sizing 
   flutter_screenutil: ^5.0.0+2
+  # Preview UI on different devices 
   device_preview: ^0.7.3
+  # complex network calls 
+  dio: ^4.0.0
+  # extra icons 
+  font_awesome_flutter: ^9.1.0
+  # bottom_bar 
+  persistent_bottom_nav_bar: ^4.0.2
 
 dev_dependencies:
   flutter_test:

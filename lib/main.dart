@@ -7,11 +7,15 @@ import 'package:trade_app/screens/auth/login.dart';
 import 'package:trade_app/screens/auth/onboarding.dart';
 import 'package:trade_app/screens/auth/register.dart';
 import 'package:trade_app/screens/auth/reset_password.dart';
-import 'package:trade_app/screens/home.dart';
 
 void main() async {
   setupLocator();
-  runApp(MaterialApp(home: MyApp()));
+  runApp(
+    MaterialApp(
+      // debugShowCheckedModeBanner: false,
+      home: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -22,6 +26,7 @@ class MyApp extends StatelessWidget {
       designSize: Size(MediaQuery.of(context).size.width,
           MediaQuery.of(context).size.height),
       builder: () => MaterialApp(
+        // debugShowCheckedModeBanner: false,
         initialRoute: LoginScreen.route,
         routes: {
           OnboardingScreen.route: (context) => OnboardingScreen(),
@@ -30,7 +35,6 @@ class MyApp extends StatelessWidget {
           ForgotPassword.route: (context) => ForgotPassword(),
           ResetPassword.route: (context) => ResetPassword(),
           EmailVerification.route: (context) => EmailVerification(),
-          HomeScreen.route: (context) => HomeScreen(),
         },
       ),
     );
