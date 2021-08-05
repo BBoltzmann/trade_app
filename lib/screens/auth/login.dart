@@ -20,7 +20,7 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
   UserController _con = new UserController();
 
   _LoginScreenState() : super(UserController()) {
-    _con = controller;
+    _con = controller as UserController;
   }
   @override
   Widget build(BuildContext context) {
@@ -68,13 +68,13 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                   title: 'Login',
                   bgColor: appColor,
                   onPressed: () {
-                    if (!_con.user.email.contains('@')) {
-                      Utility.showMessage(_con.scaffoldKey?.currentContext,
+                    if (!(_con.user.email?.contains('@') ?? false)) {
+                      Utility.showMessage(_con.scaffoldKey.currentContext!,
                           message: 'Please enter a valid email address');
                       return;
                     }
                     if ((_con.user.password?.length ?? 0) < 8) {
-                      Utility.showMessage(_con.scaffoldKey?.currentContext,
+                      Utility.showMessage(_con.scaffoldKey.currentContext!,
                           message: 'Password is too short');
                       return;
                     }

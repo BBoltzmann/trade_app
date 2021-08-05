@@ -10,13 +10,13 @@ import 'package:trade_app/widgets/constants.dart';
 
 class UserController extends ControllerMVC {
   User user = new User();
-  String confirmedPassword;
-  String token;
+  String? confirmedPassword;
+  String? token;
 
-  GlobalKey<ScaffoldState> scaffoldKey;
-  GlobalKey<FormState> loginFormKey, registerFormKey;
-  OverlayEntry verificationOverlay, loader;
-  FlutterSecureStorage storage;
+ late GlobalKey<ScaffoldState> scaffoldKey;
+ late GlobalKey<FormState> loginFormKey, registerFormKey;
+ late OverlayEntry verificationOverlay, loader;
+ late FlutterSecureStorage storage;
   var fetchingAddresses = true;
 
   bool verificationActive = false, autoValidate = false, hidePassword = true;
@@ -30,21 +30,21 @@ class UserController extends ControllerMVC {
 
   login() async {
     try {
-      loader = Utility.load(scaffoldKey?.currentContext);
+      loader = Utility.load(scaffoldKey.currentContext!);
 
       IResponse<User> res = await user_repo.login(user);
 
       if (res.success == true) {
         storage.write(key: "token", value: res.token);
-        storage.write(key: "uid", value: res.data.uuid);
-        Navigator.of(scaffoldKey?.currentContext).pushReplacementNamed(
+        storage.write(key: "uid", value: res.data!.uuid);
+        Navigator.of(scaffoldKey.currentContext!).pushReplacementNamed(
           HomeScreen.route,
           arguments: 0,
         );
         loader.remove();
       } else {
         Utility.showMessage(
-          scaffoldKey?.currentContext,
+          scaffoldKey.currentContext!,
           message: res.message,
         );
         loader.remove();
@@ -55,24 +55,24 @@ class UserController extends ControllerMVC {
   }
 
   void register() async {
-    loader = Utility.load(scaffoldKey?.currentContext);
+    loader = Utility.load(scaffoldKey.currentContext!);
     print(user.toMap());
     IResponse<User> res = await user_repo.userSignUp(user);
 
     if (res.success == true) {
       storage.write(key: "token", value: res.token);
-      storage.write(key: "firstname", value: res.data.firstname);
-      storage.write(key: "firstname", value: res.data.lastname);
-      storage.write(key: "phoneNumber", value: res.data.phone);
-      storage.write(key: "country", value: res.data.country);
-      storage.write(key: "state", value: res.data.state);
-      storage.write(key: "city", value: res.data.city);
-      storage.write(key: "email", value: res.data.email);
-      storage.write(key: "password", value: res.data.password);
+      storage.write(key: "firstname", value: res.data!.firstname);
+      storage.write(key: "firstname", value: res.data!.lastname);
+      storage.write(key: "phoneNumber", value: res.data!.phone);
+      storage.write(key: "country", value: res.data!.country);
+      storage.write(key: "state", value: res.data!.state);
+      storage.write(key: "city", value: res.data!.city);
+      storage.write(key: "email", value: res.data!.email);
+      storage.write(key: "password", value: res.data!.password);
       print(res.message);
       print(res.success);
 
-      Navigator.of(scaffoldKey?.currentContext).pushNamedAndRemoveUntil(
+      Navigator.of(scaffoldKey.currentContext!).pushNamedAndRemoveUntil(
         HomeScreen.route,
         (route) => false,
       );
@@ -81,7 +81,7 @@ class UserController extends ControllerMVC {
       print(res.message);
       print(res.success);
       Utility.showMessage(
-        scaffoldKey?.currentContext,
+        scaffoldKey.currentContext!,
         message: res.message.toString(),
         type: MessageTypes.error,
       );

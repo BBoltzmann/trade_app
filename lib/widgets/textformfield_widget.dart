@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:trade_app/widgets/constants.dart';
 
 class TextFormFieldWidget extends StatelessWidget {
-  final String label, hintText, suffixText;
-  final IconData  prefixIconData;
-  final bool obscureText, enabled, iconData;
-  final String initialValue;
-  final TextEditingController controller;
-  final Function onChanged, onSaved, onIconTap, onFieldSubmitted;
-  final String Function(String) validator;
+  final String? label, hintText, suffixText;
+  final IconData? prefixIconData;
+  final bool obscureText, enabled;
+  final bool? iconData;
+  final String? initialValue;
+  final TextEditingController? controller;
+  final Function? onChanged, onSaved, onIconTap, onFieldSubmitted;
+  final String Function(String)? validator;
   final TextInputType type;
-  final Color borderColor;
-  final Color fillColor;
-  final FocusNode focusNode;
+  final Color? borderColor;
+  final Color? fillColor;
+  final FocusNode? focusNode;
   final int maxLines;
 
   const TextFormFieldWidget({
-    Key key,
+    Key? key,
     this.label,
     this.hintText,
     this.iconData,
@@ -30,7 +32,7 @@ class TextFormFieldWidget extends StatelessWidget {
     this.suffixText,
     this.validator,
     this.initialValue,
-    this.type,
+    this.type = TextInputType.text,
     this.onIconTap,
     this.maxLines = 1,
     this.prefixIconData,
@@ -96,19 +98,29 @@ class TextFormFieldWidget extends StatelessWidget {
               ),
               floatingLabelBehavior: FloatingLabelBehavior.always,
               suffixIcon: InkWell(
-                onTap: onIconTap,
+                onTap: () {
+                  if (onIconTap != null) onIconTap!();
+                },
                 child: Icon(prefixIconData, color: Colors.grey[500]),
               ),
               suffixText: suffixText ?? '',
             ),
       obscureText: obscureText,
       enabled: enabled,
-      onSaved: onSaved,
+      onSaved: (value) {
+        if (onSaved != null) onSaved!(value);
+      },
       initialValue: initialValue,
-      onChanged: onChanged,
-      onFieldSubmitted: onFieldSubmitted,
+      onChanged: (value) {
+        if (onChanged != null) onChanged!(value);
+      },
+      onFieldSubmitted: (value) {
+        if (onFieldSubmitted != null) onFieldSubmitted!(value);
+      },
       controller: controller,
-      validator: validator,
+      validator: (value) {
+        if (validator != null) validator!(value!);
+      },
       focusNode: focusNode,
       maxLines: maxLines,
     );
