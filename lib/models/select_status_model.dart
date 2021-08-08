@@ -13,7 +13,7 @@ class StatusModel {
     emoji = json['emoji'];
     emojiU = json['emojiU'];
     if (json['state'] != null) {
-      state = new List<State>();
+      state = [];
       json['state'].forEach((v) {
         state.add(new State.fromJson(v));
       });
@@ -46,7 +46,7 @@ class State {
     name = json['name'];
     countryId = json['country_id'];
     if (json['city'] != null) {
-      city = new List<City>();
+      city = [];
       json['city'].forEach((v) {
         city.add(new City.fromJson(v));
       });

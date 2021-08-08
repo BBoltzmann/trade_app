@@ -1,9 +1,7 @@
-import 'dart:convert';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:get_it/get_it.dart';
 import 'package:trade_app/helpers/locator.dart';
 import 'package:trade_app/screens/auth/login.dart';
 import 'package:trade_app/widgets/constants.dart';

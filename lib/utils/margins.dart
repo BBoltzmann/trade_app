@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-Widget horizontalSpaceTiny = SizedBox(width: ScreenUtil().setWidth(5.0));
-Widget horizontalSpaceSmall = SizedBox(width: ScreenUtil().setWidth(10.0));
-Widget horizontalSpaceMedium = SizedBox(width: ScreenUtil().setWidth(25.0));
+Widget horizontalSpaceTiny = SizedBox(width: 5.0.w);
+Widget horizontalSpaceSmall = SizedBox(width: 10.0.w);
+Widget horizontalSpaceMedium = SizedBox(width: 25.0.w);
 
-Widget verticalSpaceTiny = SizedBox(height: ScreenUtil().setWidth(5.0));
-Widget verticalSpaceSmall = SizedBox(height: ScreenUtil().setWidth(10.0));
-Widget verticalSpaceMedium = SizedBox(height: ScreenUtil().setWidth(25.0));
-Widget verticalSpaceSpecial = SizedBox(height: ScreenUtil().setWidth(40.0));
-Widget verticalSpaceLarge = SizedBox(height: ScreenUtil().setWidth(50.0));
-Widget verticalSpaceMassive = SizedBox(height: ScreenUtil().setWidth(120.0));
+Widget verticalSpaceTiny = SizedBox(height: 5.0.h);
+Widget verticalSpaceSmall = SizedBox(height: 10.0.h);
+Widget verticalSpaceMedium = SizedBox(height: 25.0.h);
+Widget verticalSpaceSpecial = SizedBox(height: 40.0.h);
+Widget verticalSpaceLarge = SizedBox(height: 50.0.h);
+Widget verticalSpaceMassive = SizedBox(height: 120.0.h);
 
 Widget spacedDivider = Column(
   children: <Widget>[
     verticalSpaceMedium,
-    Divider(color: Colors.blueGrey, height: ScreenUtil().setWidth(5.0)),
+    Divider(color: Colors.blueGrey, height: 5.0.h),
     verticalSpaceMedium,
   ],
 );
 
-Widget verticalSpace(double height) => SizedBox(height: height);
+Widget verticalSpace(double height) => SizedBox(height: height.h);
 
 double screenWidth(BuildContext context) => MediaQuery.of(context).size.width;
 double screenHeight(BuildContext context) => MediaQuery.of(context).size.height;
@@ -40,10 +40,6 @@ double thirdScreenWidth(BuildContext context) =>
     screenWidthFraction(context, dividedBy: 3);
 
 
-double height(double height){
-  return ScreenUtil().setHeight(height);
-}
+double height(double height) => height.h;
 
-double width(double width){
-  return ScreenUtil().setWidth(width);
-}
+double width(double width) => width.w;

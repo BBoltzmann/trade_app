@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
-
+import 'package:trade_app/utils/text_style.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 class ButtonWidget extends StatelessWidget {
   final String title;
   final Function onPressed;
   final Color textColor, bgColor;
+  final double padding;
 
-  ButtonWidget({this.title, this.onPressed, this.textColor, this.bgColor});
+  ButtonWidget({this.title, this.onPressed, this.textColor, this.bgColor, this.padding = 70});
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 70),
+      padding: EdgeInsets.symmetric(horizontal: padding.w),
       child: TextButton(
         style: ButtonStyle(
             shape: MaterialStateProperty.all(RoundedRectangleBorder(
@@ -18,11 +20,11 @@ class ButtonWidget extends StatelessWidget {
             foregroundColor: MaterialStateProperty.all(textColor)),
         onPressed: onPressed,
         child: Container(
-          height: 30,
+          height: 30.h,
           child: Center(
             child: Text(
               title,
-              style: TextStyle(fontSize: 18, color: Colors.white),
+              style: style(fontSize: 12.h, textColor: Colors.white, ),
             ),
           ),
         ),

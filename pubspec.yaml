@@ -53,8 +53,8 @@ dependencies:
   dio: ^4.0.0
   # extra icons 
   font_awesome_flutter: ^9.1.0
-  # bottom_bar 
-  persistent_bottom_nav_bar: ^4.0.2
+  # Fonts
+  google_fonts: ^2.1.0
 
 dev_dependencies:
   flutter_test:

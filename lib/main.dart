@@ -19,15 +19,15 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: Size(MediaQuery.of(context).size.width,
           MediaQuery.of(context).size.height),
       builder: () => MaterialApp(
-        // debugShowCheckedModeBanner: false,
+        debugShowCheckedModeBanner: false,
         initialRoute: LoginScreen.route,
+        // home: ReportsPage(),
         routes: {
           OnboardingScreen.route: (context) => OnboardingScreen(),
           LoginScreen.route: (context) => LoginScreen(),
@@ -40,32 +40,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-// import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:trade_app/utils%20/locator.dart';
-// import 'package:trade_app/utils%20/navigator.dart';
-// import 'package:trade_app/utils%20/router.dart';
-
-// void main() {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   locatorSetup();
-
-//   runApp(
-//     // Material App providing MediaQuery as an ancestor.
-//     MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       home: TradeApp(),
-//     ),
-//   );
-// }
-
-// class TradeApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return ScreenUtilInit(
-//       designSize: Size(MediaQuery.of(context).size.height,
-//           MediaQuery.of(context).size.height),
-//       builder: () => MaterialApp(
-//         navigatorKey: locator<NavigationService>().navigationKey,
-//         onGenerateRoute: generateRoute,
-//       ),
