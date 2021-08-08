@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:trade_app/controllers/user_controller.dart';
 import 'package:trade_app/helpers/utility.dart';
-import 'package:trade_app/screens/auth/email_verification.dart';
 import 'package:trade_app/widgets/appbar_widget.dart';
 import 'package:trade_app/widgets/button_widget.dart';
 import 'package:trade_app/widgets/constants.dart';
@@ -60,20 +58,20 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                 SizedBox(height: 10),
                 TextFormFieldWidget(
                     borderColor: appColor,
-                    onChanged: (String input) => _con.user.firstname = input),
+                    onChanged: (String? input) => _con.user.firstname = input),
                 SizedBox(height: 20),
                 Align(
                     alignment: Alignment.bottomLeft, child: Text('Last Name')),
                 SizedBox(height: 10),
                 TextFormFieldWidget(
                     borderColor: appColor,
-                    onChanged: (String input) => _con.user.lastname = input),
+                    onChanged: (String? input) => _con.user.lastname = input),
                 SizedBox(height: 10),
                 Align(alignment: Alignment.bottomLeft, child: Text('Email')),
                 SizedBox(height: 10),
                 TextFormFieldWidget(
                     borderColor: appColor,
-                    onChanged: (String input) => _con.user.email = input),
+                    onChanged: (String? input) => _con.user.email = input),
                 SizedBox(height: 10),
                 Align(alignment: Alignment.bottomLeft, child: Text('Password')),
                 SizedBox(height: 10),
@@ -81,8 +79,8 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                     borderColor: appColor,
                     controller: passwordController,
                     obscureText: _con.hidePassword,
-                    onIconTap: () => _con.togglePasswordVisibility(),
-                    iconData: true,
+                    //     onIconTap: () => _con.togglePasswordVisibility(),
+                    // iconData: true,
                     prefixIconData: _con.hidePassword
                         ? Icons.visibility
                         : Icons.visibility_off),
@@ -93,10 +91,10 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                 SizedBox(height: 10),
                 TextFormFieldWidget(
                     borderColor: appColor,
-                    onChanged: (String input) => _con.user.password = input,
+                    onChanged: (String? input) => _con.user.password = input,
                     obscureText: _con.hidePassword,
-                    onIconTap: () => _con.togglePasswordVisibility(),
-                    iconData: true,
+                    //       onIconTap: () => _con.togglePasswordVisibility(),
+                    //     iconData: true,
                     prefixIconData: _con.hidePassword
                         ? Icons.visibility
                         : Icons.visibility_off),
@@ -115,7 +113,8 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                     });
                     _con.user.city = value;
                     print(cityValue);
-                  }, onCityChanged: (String value) {  },
+                  },
+                  onCityChanged: (String value) {},
                 ),
                 SizedBox(height: 30),
                 ButtonWidget(

@@ -40,16 +40,16 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
               SizedBox(height: 10),
               TextFormFieldWidget(
                   borderColor: appColor,
-                  onChanged: (String input) => _con.user.email = input),
+                  onChanged: (String? input) => _con.user.email = input),
               SizedBox(height: 20),
               Align(alignment: Alignment.bottomLeft, child: Text('Password')),
               SizedBox(height: 10),
               TextFormFieldWidget(
                   borderColor: appColor,
-                  onChanged: (String input) => _con.user.password = input,
+                  onChanged: (String? input) => _con.user.password = input,
                   obscureText: _con.hidePassword,
-                  onIconTap: () => _con.togglePasswordVisibility(),
-                  iconData: true,
+                  //onIconTap: () => _con.togglePasswordVisibility(),
+                  //iconData: true,
                   prefixIconData: _con.hidePassword
                       ? Icons.visibility
                       : Icons.visibility_off),
