@@ -56,22 +56,26 @@ Widget submitReport(String reportType,{String hintText = "Tell us about it?"}) {
         fontStyle: FontStyle.normal,
       ),
       verticalSpace(63),
-      Container(
-        padding: EdgeInsets.symmetric(horizontal: 38.w),
-        height: 118.h,
-        width: double.infinity,
-        child: TextFormField(
-          maxLines: 10,
-          decoration: InputDecoration(
-            enabledBorder:
-                OutlineInputBorder(borderRadius: BorderRadius.circular(10.r), borderSide: BorderSide(color: back_arrow_grey)),
-            focusedBorder:
-                OutlineInputBorder(borderRadius: BorderRadius.circular(10.r), borderSide: BorderSide(color: back_arrow_grey)),
-            hintText: hintText,
-            hintStyle: style(
-              weight: FontWeight.w400,
-              fontStyle: FontStyle.normal,
-              textColor: back_arrow_grey,
+      Padding(
+        padding: EdgeInsets.symmetric(horizontal: 38.h),
+        child: Card(
+          child: Container(
+            height: 118.h,
+            width: double.infinity,
+            child: TextFormField(
+              maxLines: 10,
+              decoration: InputDecoration(
+                enabledBorder:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(10.r), borderSide: BorderSide(color: Colors.transparent)),
+                focusedBorder:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(10.r), borderSide: BorderSide(color: Colors.transparent)),
+                hintText: hintText,
+                hintStyle: style(
+                  weight: FontWeight.w400,
+                  fontStyle: FontStyle.normal,
+                  textColor: back_arrow_grey,
+                ),
+              ),
             ),
           ),
         ),
