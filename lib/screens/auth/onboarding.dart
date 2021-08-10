@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:trade_app/screens/auth/login.dart';
+import 'package:trade_app/screens/auth/register.dart';
+import 'package:trade_app/widgets/button_widget.dart';
 import 'package:trade_app/widgets/constants.dart';
+import 'package:trade_app/widgets/outline_button_widget.dart';
 
 class OnboardingScreen extends StatefulWidget {
   static const String route = 'OnboardingScreen';
@@ -19,8 +22,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     List<Widget> list = [];
     for (int i = 0; i < _numPages; i++) {
       list.add(i == _currentPage
-          ? indicator(true, Colors.orangeAccent)
-          : indicator(false, Colors.orangeAccent));
+          ? indicator(true, appColor)
+          : indicator(false, appColor));
     }
     return list;
   }
@@ -46,76 +49,55 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SizedBox(height: 20),
-                      SvgPicture.asset("assets/images/onboarding1.svg"),
+                      Image.asset("assets/images/onboarding1.png"),
                       SizedBox(height: 60),
-                      Text('Etiam lobortis a sit pretium proin cras.',
+                      Text('Upload a picture of your product',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontSize: 23, fontWeight: FontWeight.bold)),
-                      SizedBox(height: 20),
-                      Text(
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Netus.',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(),
-                      ),
-                      SizedBox(height: 40),
-                      FloatingActionButton(
-                        onPressed: () {},
-                        backgroundColor: appColor,
-                        child: Icon(Icons.chevron_right),
-                      )
+                              fontSize: 28, fontWeight: FontWeight.bold)),
                     ],
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SizedBox(height: 20),
-                      SvgPicture.asset("assets/images/onboarding3.svg"),
+                      Image.asset("assets/images/onboarding2.png"),
                       SizedBox(height: 60),
-                      Text('Etiam lobortis a sit pretium proin cras.',
+                      Text('View pictures of products around you',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontSize: 23, fontWeight: FontWeight.bold)),
-                      SizedBox(height: 20),
-                      Text(
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Netus.',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(),
-                      ),
-                      SizedBox(height: 40),
-                      FloatingActionButton(
-                        onPressed: () {},
-                        backgroundColor: appColor,
-                        child: Icon(Icons.chevron_right),
-                      )
+                              fontSize: 28, fontWeight: FontWeight.bold)),
                     ],
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SizedBox(height: 20),
-                      SvgPicture.asset("assets/images/onboarding2.svg"),
+                      Image.asset("assets/images/onboarding3.png"),
                       SizedBox(height: 60),
-                      Text('Etiam lobortis a sit pretium proin cras.',
+                      Text('Interact with a trader to secure a deal',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontSize: 23, fontWeight: FontWeight.bold)),
-                      SizedBox(height: 20),
-                      Text(
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Netus.',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(),
-                      ),
-                      SizedBox(height: 40),
-                      FloatingActionButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => LoginScreen()));
-                        },
-                        backgroundColor: appColor,
-                        child: Icon(Icons.chevron_right),
+                              fontSize: 28, fontWeight: FontWeight.bold)),
+                      SizedBox(height: 70),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          OultineButtonWidget(
+                              onPressed: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => LoginScreen())),
+                              title: 'Login',
+                              textColor: appColor),
+                          ButtonWidget( onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => RegisterScreen())),
+                              bgColor: appColor,
+                              title: 'Sign up',
+                              textColor: Colors.white),
+                        ],
                       )
                     ],
                   ),
@@ -141,9 +123,9 @@ Widget indicator(bool isActive, Color color) {
     duration: Duration(microseconds: 150),
     margin: EdgeInsets.symmetric(horizontal: 8.0),
     height: 9.0,
-    width: 9.0,
+    width: 17,
     decoration: BoxDecoration(
-      color: isActive ? color : Colors.grey[400],
+      color: isActive ? color : appColor.withOpacity(0.2),
       borderRadius: BorderRadius.all(Radius.circular((25))),
     ),
     // decoration: BoxDecoration(

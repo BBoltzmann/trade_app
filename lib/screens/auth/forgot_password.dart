@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trade_app/screens/auth/email_verification.dart';
 import 'package:trade_app/screens/auth/reset_password.dart';
 import 'package:trade_app/widgets/appbar_widget.dart';
 import 'package:trade_app/widgets/button_widget.dart';
@@ -16,6 +17,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         appBar: PreferredSize(
             preferredSize: const Size.fromHeight(40),
             child: AppBarWidget(
@@ -24,19 +26,18 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             )),
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text('Forgot Password',
                     style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                        TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
                 SizedBox(height: 10),
                 Text(
-                  'We will need your registered email, and a reset code  will be sent to reset your password',
-                ),
-                SizedBox(height: 30),
+                    'Enter the email associated with your account to receive instructions on how to reset password'),
+                SizedBox(height: 50),
                 Align(alignment: Alignment.bottomLeft, child: Text('Email')),
                 SizedBox(height: 10),
                 TextFormFieldWidget(borderColor: appColor),
@@ -48,7 +49,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ResetPassword()));
+                              builder: (context) => EmailVerification()));
                     }),
               ],
             ),

@@ -8,24 +8,24 @@ class ButtonWidget extends StatelessWidget {
   ButtonWidget({this.title, this.onPressed, this.textColor, this.bgColor});
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 70),
-      child: TextButton(
+    return  OutlinedButton(
         style: ButtonStyle(
             shape: MaterialStateProperty.all(RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(5))),
-            backgroundColor: MaterialStateProperty.all(bgColor),
-            foregroundColor: MaterialStateProperty.all(textColor)),
+            backgroundColor: MaterialStateProperty.all(bgColor)),
         onPressed: onPressed,
-        child: Container(
-          height: 30,
-          child: Center(
-            child: Text(
-              title,
-              style: TextStyle(fontSize: 18, color: Colors.white),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+          child: Container(
+            height: 20,
+            child: Center(
+              child: Text(
+                title,
+                style: TextStyle(fontSize: 18, color: Colors.white),
+              ),
             ),
           ),
-        ),
+     
       ),
     );
   }
