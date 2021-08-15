@@ -5,10 +5,9 @@ class CustomText extends StatelessWidget {
   final String text;
   final double fontSize;
   final FontWeight weight;
-  final FontStyle fontStyle;
   final Color textColor;
   const CustomText(this.text,
-      {this.fontSize, this.weight, this.fontStyle, this.textColor});
+      {this.fontSize = 12, this.weight, this.textColor});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +16,6 @@ class CustomText extends StatelessWidget {
       style: style(
         fontSize: fontSize,
         weight: weight,
-        fontStyle: fontStyle,
         textColor: textColor,
       ),
     );

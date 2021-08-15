@@ -18,7 +18,6 @@ Widget spamScam(String reportType) {
         reportType,
         fontSize: 20,
         weight: FontWeight.w700,
-        fontStyle: FontStyle.normal,
       ),
       verticalSpace(16),
       circleVerify(),
@@ -27,7 +26,6 @@ Widget spamScam(String reportType) {
         reportThanks,
         fontSize: 16,
         weight: FontWeight.w400,
-        fontStyle: FontStyle.normal,
       ),
       verticalSpace(19),
       Container(
@@ -37,7 +35,6 @@ Widget spamScam(String reportType) {
           reportStatement,
           fontSize: 16,
           weight: FontWeight.w400,
-          fontStyle: FontStyle.normal,
         ),
       )
     ],
@@ -53,7 +50,6 @@ Widget submitReport(String reportType,{String hintText = "Tell us about it?"}) {
         reportType,
         fontSize: 20,
         weight: FontWeight.w700,
-        fontStyle: FontStyle.normal,
       ),
       verticalSpace(63),
       Padding(
@@ -72,7 +68,6 @@ Widget submitReport(String reportType,{String hintText = "Tell us about it?"}) {
                 hintText: hintText,
                 hintStyle: style(
                   weight: FontWeight.w400,
-                  fontStyle: FontStyle.normal,
                   textColor: back_arrow_grey,
                 ),
               ),
