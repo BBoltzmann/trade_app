@@ -1,7 +1,7 @@
 import 'package:trade_app/helpers/custom_trace.dart';
 
 class User {
-  String email,
+  String? email,
       phone,
       password,
       uuid,

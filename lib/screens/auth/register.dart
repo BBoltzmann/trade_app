@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:trade_app/controllers/user_controller.dart';
 import 'package:trade_app/helpers/utility.dart';
-import 'package:trade_app/screens/auth/email_verification.dart';
 import 'package:trade_app/widgets/appbar_widget.dart';
 import 'package:trade_app/widgets/button_widget.dart';
 import 'package:trade_app/widgets/constants.dart';
@@ -21,12 +19,12 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
   UserController _con = new UserController();
 
   _RegisterScreenState() : super(UserController()) {
-    _con = controller;
+    _con = controller as UserController;
   }
 
-  String countryValue;
-  String stateValue;
-  String cityValue;
+  String? countryValue;
+  String? stateValue;
+  String? cityValue;
 
   TextEditingController passwordController = new TextEditingController();
 
@@ -60,20 +58,20 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                 SizedBox(height: 10),
                 TextFormFieldWidget(
                     borderColor: appColor,
-                    onChanged: (String input) => _con.user.firstname = input),
+                    onChanged: (String? input) => _con.user.firstname = input),
                 SizedBox(height: 20),
                 Align(
                     alignment: Alignment.bottomLeft, child: Text('Last Name')),
                 SizedBox(height: 10),
                 TextFormFieldWidget(
                     borderColor: appColor,
-                    onChanged: (String input) => _con.user.lastname = input),
+                    onChanged: (String? input) => _con.user.lastname = input),
                 SizedBox(height: 10),
                 Align(alignment: Alignment.bottomLeft, child: Text('Email')),
                 SizedBox(height: 10),
                 TextFormFieldWidget(
                     borderColor: appColor,
-                    onChanged: (String input) => _con.user.email = input),
+                    onChanged: (String? input) => _con.user.email = input),
                 SizedBox(height: 10),
                 Align(alignment: Alignment.bottomLeft, child: Text('Password')),
                 SizedBox(height: 10),
@@ -81,8 +79,8 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                     borderColor: appColor,
                     controller: passwordController,
                     obscureText: _con.hidePassword,
-                    onIconTap: () => _con.togglePasswordVisibility(),
-                    iconData: true,
+                    //     onIconTap: () => _con.togglePasswordVisibility(),
+                    // iconData: true,
                     prefixIconData: _con.hidePassword
                         ? Icons.visibility
                         : Icons.visibility_off),
@@ -93,10 +91,10 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                 SizedBox(height: 10),
                 TextFormFieldWidget(
                     borderColor: appColor,
-                    onChanged: (String input) => _con.user.password = input,
+                    onChanged: (String? input) => _con.user.password = input,
                     obscureText: _con.hidePassword,
-                    onIconTap: () => _con.togglePasswordVisibility(),
-                    iconData: true,
+                    //       onIconTap: () => _con.togglePasswordVisibility(),
+                    //     iconData: true,
                     prefixIconData: _con.hidePassword
                         ? Icons.visibility
                         : Icons.visibility_off),
@@ -116,6 +114,7 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                     _con.user.city = value;
                     print(cityValue);
                   },
+                  onCityChanged: (String value) {},
                 ),
                 SizedBox(height: 30),
                 ButtonWidget(
@@ -126,37 +125,37 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                       _con.user.state = 'California';
 
                       if ((_con.user.firstname?.length ?? 0) < 3) {
-                        Utility.showMessage(_con.scaffoldKey?.currentContext,
+                        Utility.showMessage(_con.scaffoldKey.currentContext!,
                             message: 'Name is too short');
                         return;
                       }
                       if ((_con.user.lastname?.length ?? 0) < 3) {
-                        Utility.showMessage(_con.scaffoldKey?.currentContext,
+                        Utility.showMessage(_con.scaffoldKey.currentContext!,
                             message: 'Name is too short');
                         return;
                       }
-                      if (!_con.user.email.contains('@')) {
-                        Utility.showMessage(_con.scaffoldKey?.currentContext,
+                      if (!(_con.user.email?.contains('@') ?? false)) {
+                        Utility.showMessage(_con.scaffoldKey.currentContext!,
                             message: 'Please enter a valid email address');
                         return;
                       }
-                      if (_con.user.password.length < 8) {
-                        Utility.showMessage(_con.scaffoldKey?.currentContext,
+                      if ((_con.user.password?.length ?? 0) < 8) {
+                        Utility.showMessage(_con.scaffoldKey.currentContext!,
                             message: 'Password is too short');
                         return;
                       }
                       if (passwordController.text != _con.user.password) {
-                        Utility.showMessage(_con.scaffoldKey?.currentContext,
+                        Utility.showMessage(_con.scaffoldKey.currentContext!,
                             message: 'Passwords do not match');
                         return;
                       }
                       if (_con.user.country == null) {
-                        Utility.showMessage(_con.scaffoldKey?.currentContext,
+                        Utility.showMessage(_con.scaffoldKey.currentContext!,
                             message: 'Please select your country');
                         return;
                       }
                       if (_con.user.city == null) {
-                        Utility.showMessage(_con.scaffoldKey?.currentContext,
+                        Utility.showMessage(_con.scaffoldKey.currentContext!,
                             message: 'Please select your city');
                         return;
                       }

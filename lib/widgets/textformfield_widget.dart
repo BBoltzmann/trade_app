@@ -1,25 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:trade_app/utils/colors.dart';
+import 'package:trade_app/utils/ui_helpers.dart';
+import 'package:trade_app/widgets/app_text.dart';
 import 'package:trade_app/widgets/constants.dart';
+import 'package:trade_app/widgets/size_config.dart';
 
 class TextFormFieldWidget extends StatelessWidget {
-  final String label, hintText, suffixText;
-  final IconData  prefixIconData;
-  final bool obscureText, enabled, iconData;
-  final String initialValue;
-  final TextEditingController controller;
-  final Function onChanged, onSaved, onIconTap, onFieldSubmitted;
-  final String Function(String) validator;
+  final String? label, hintText, suffixText;
+  final IconData? prefixIconData;
+  final bool obscureText, enabled;
+  final String? initialValue;
+  final TextEditingController? controller;
+  final Function(String?)? onChanged, onSaved, onFieldSubmitted;
+  final String? Function(String?)? validator;
   final TextInputType type;
-  final Color borderColor;
-  final Color fillColor;
-  final FocusNode focusNode;
+  final Color? borderColor;
+  final Color? fillColor;
+  final FocusNode? focusNode;
   final int maxLines;
-
+  final Widget? suffixIcon;
+  final bool readOnly;
+  final String? title;
   const TextFormFieldWidget({
-    Key key,
+    Key? key,
+    this.title,
     this.label,
     this.hintText,
-    this.iconData,
     this.controller,
     this.onChanged,
     this.focusNode,
@@ -30,87 +38,78 @@ class TextFormFieldWidget extends StatelessWidget {
     this.suffixText,
     this.validator,
     this.initialValue,
-    this.type,
-    this.onIconTap,
+    this.suffixIcon,
+    this.type = TextInputType.text,
     this.maxLines = 1,
     this.prefixIconData,
     this.fillColor,
     this.borderColor,
+    this.readOnly = false,
   }) : super(key: key);
 
   Widget build(BuildContext context) {
     final inputBorder = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(5),
-      borderSide: BorderSide(
-        color: appColor,
-        width: 1,
-      ),
+      borderRadius: BorderRadius.circular(4),
+      borderSide: BorderSide(color: AppColors.grey1, width: 0.5),
     );
-    return TextFormField(
-      keyboardType: type,
-      cursorColor: appColor,
-      decoration: iconData == false
-          ? InputDecoration(
-              filled: false,
-              border: inputBorder,
-              enabledBorder: inputBorder,
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5),
-                borderSide: BorderSide(
-                  color: appColor,
-                  width: 1,
-                ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (title != null)
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SimpleText(
+                title!,
+                size: 14,
+                weight: FontWeight.w400,
               ),
-              disabledBorder: inputBorder,
-              errorBorder: inputBorder.copyWith(
-                borderSide: BorderSide(
-                  color: Theme.of(context).errorColor,
-                  width: 1,
-                ),
+              UIHelper.customVerticalSpace(4.0),
+            ],
+          ),
+        TextFormField(
+          readOnly: readOnly,
+          keyboardType: type,
+          cursorColor: appColor,
+          style: GoogleFonts.nunito(
+            fontWeight: FontWeight.w600,
+            fontSize: SizeConfig.textSize(14),
+            color: AppColors.appBlackVariant,
+          ),
+          decoration: InputDecoration(
+            filled: false,
+            border: inputBorder,
+            enabledBorder: inputBorder,
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(4),
+              borderSide: BorderSide(
+                color: AppColors.grey1,
+                width: 0.5,
               ),
-              errorStyle: TextStyle(color: Theme.of(context).errorColor),
-              labelText: label,
-              hintText: hintText ?? '',
-              contentPadding: EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 20,
-              ),
-              floatingLabelBehavior: FloatingLabelBehavior.always,
-            )
-          : InputDecoration(
-              filled: false,
-              border: inputBorder,
-              enabledBorder: inputBorder,
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5),
-                borderSide: BorderSide(
-                  color: appColor,
-                  width: 1,
-                ),
-              ),
-              labelText: label,
-              hintText: hintText ?? '',
-              contentPadding: EdgeInsets.symmetric(
-                horizontal: 10,
-                vertical: 20,
-              ),
-              floatingLabelBehavior: FloatingLabelBehavior.always,
-              suffixIcon: InkWell(
-                onTap: onIconTap,
-                child: Icon(prefixIconData, color: Colors.grey[500]),
-              ),
-              suffixText: suffixText ?? '',
             ),
-      obscureText: obscureText,
-      enabled: enabled,
-      onSaved: onSaved,
-      initialValue: initialValue,
-      onChanged: onChanged,
-      onFieldSubmitted: onFieldSubmitted,
-      controller: controller,
-      validator: validator,
-      focusNode: focusNode,
-      maxLines: maxLines,
+            labelText: label,
+            hintText: hintText ?? '',
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: 8,
+              vertical: 10,
+            ),
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+            suffixIcon: suffixIcon,
+            suffixText: suffixText ?? '',
+          ),
+          obscureText: obscureText,
+          enabled: enabled,
+          onSaved: onSaved,
+          initialValue: initialValue,
+          onChanged: onChanged,
+          onFieldSubmitted: onFieldSubmitted,
+          controller: controller,
+          validator: validator,
+          focusNode: focusNode,
+          maxLines: maxLines,
+        ),
+      ],
     );
   }
 }
