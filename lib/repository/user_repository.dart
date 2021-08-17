@@ -24,14 +24,13 @@ Future<IResponse<User>> login(User user) async {
     body: json.encode(user.loginCredentials()),
     headers: headers,
   );
-
   IResponse<User> alRes = IResponse(
-    statusCode: res.statusCode,
-    message: json.decode(res.body)['message'],
-    success: json.decode(res.body)['success'],
-    token: json.decode(res.body)['access_token'],
-    uuid: json.decode(res.body)['user_id'],
-  );
+      statusCode: res.statusCode,
+      message: json.decode(res.body)['message'],
+      success: json.decode(res.body)['success'],
+      token: json.decode(res.body)['data']['token'],
+      uuid: json.decode(res.body)['data']['userId'],
+      isProfileCompleted: json.decode(res.body)['isProfileCompleted']);
 
   // TODO: Remove, Inherit from Interceptor
   switch (res.statusCode) {
@@ -70,7 +69,9 @@ Future<IResponse<User>> userSignUp(User user) async {
       statusCode: res.statusCode,
       message: json.decode(res.body)['message'],
       success: json.decode(res.body)['success'],
-      token: json.decode(res.body)['access_token']);
+      uuid: json.decode(res.body)['userId'],
+      isProfileCompleted: json.decode(res.body)['isProfileCompleted'],
+      token: json.decode(res.body)['token']);
 
   // TODO: Remove, Inherit from Interceptor
   switch (res.statusCode) {
@@ -85,6 +86,35 @@ Future<IResponse<User>> userSignUp(User user) async {
   print(res.statusCode);
   print(res.body);
   return alRes;
+}
+
+Future<IResponse<User>> getUserProfile() async {
+  try {
+  FlutterSecureStorage storage = getIt<FlutterSecureStorage>();
+
+  Map<String, String> headers = {
+    "content-type": "application/json",
+    "accept": "application/json",
+    "authorization": 'Bearer ${await storage.read(key: 'token')}',
+  };
+
+  var res = await http.get(
+    Uri.parse('https://wole-api.herokuapp.com/api/User/me'),
+    headers: headers,
+  );
+  print(res.body);
+  final Map data = json.decode(res.body)['data'];
+  final alRespose = IResponse<User>.fromJson(data);
+  if (data != null && data is Map) {
+    alRespose.data = User.fromJSON(data);
+    print('--- getUserDetails success');
+  }
+  return alRespose;
+  } catch (e) {
+    print('--- getUserDetails error');
+    print(e);
+    return null;
+  }
 }
 
 Future<IResponse<User>> resetPassword(String phone) async {

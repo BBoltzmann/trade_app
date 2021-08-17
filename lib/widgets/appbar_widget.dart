@@ -15,10 +15,10 @@ class AppBarWidget extends StatelessWidget {
               fontSize: 20, color: Colors.black, fontWeight: FontWeight.w600)),
       automaticallyImplyLeading: leading,
       centerTitle: false,
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.white,
       iconTheme: IconThemeData(color: Colors.black),
       brightness: Brightness.light,
-      elevation: 0,
+      elevation: 5,
     );
   }
 }

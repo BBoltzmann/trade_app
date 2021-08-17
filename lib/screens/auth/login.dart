@@ -73,7 +73,7 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
                           message: 'Please enter a valid email address');
                       return;
                     }
-                    if ((_con.user.password?.length ?? 0) < 8) {
+                    if ((_con.user.password?.length ?? 0) < 1) {
                       Utility.showMessage(_con.scaffoldKey?.currentContext,
                           message: 'Password is too short');
                       return;
