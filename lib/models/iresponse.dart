@@ -1,15 +1,19 @@
 class IResponse<T> {
   int? statusCode, uuid;
-  String? token, message;
   T? data;
-  bool? success;
   Meta? meta;
+  int statusCode;
+  String token, message, uuid;
+  bool success, isProfileCompleted;
+  Meta meta;
+
 
   IResponse(
       {this.data,
       this.token,
       this.message,
       this.uuid,
+      this.isProfileCompleted,
       this.success,
       this.statusCode});
 
@@ -17,6 +21,9 @@ class IResponse<T> {
     this.data = data;
     message = json['message'];
     success = json['success'];
+    token = json['token'];
+    uuid = json['userId'];
+    isProfileCompleted = json['isProfileCompleted'];
     meta = json['meta'] != null ? Meta.fromJson(json['meta']) : null;
   }
 
@@ -25,8 +32,9 @@ class IResponse<T> {
     map["data"] = data;
     map["token"] = token;
     map["message"] = message;
-    map["user_id"] = uuid;
+    map["userId"] = uuid;
     map["success"] = success;
+    map["isProfileCompleted"] = isProfileCompleted;
     map["status_code"] = statusCode;
     return map;
   }
