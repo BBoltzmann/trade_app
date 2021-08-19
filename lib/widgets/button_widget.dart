@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 class ButtonWidget extends StatelessWidget {
   final String title;
   final Function onPressed;
-  final Color textColor, bgColor;
+  final Color? textColor, bgColor;
 
-  ButtonWidget({this.title, this.onPressed, this.textColor, this.bgColor});
+  ButtonWidget({required this.title,required this.onPressed, this.textColor, this.bgColor});
   @override
   Widget build(BuildContext context) {
     return  OutlinedButton(

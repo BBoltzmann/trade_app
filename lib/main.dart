@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:trade_app/helpers/utility.dart';
 import 'package:trade_app/screens/auth/email_verification.dart';
-import 'package:trade_app/screens/auth/forgot_password.dart';
 import 'package:trade_app/screens/auth/login.dart';
 import 'package:trade_app/screens/auth/onboarding.dart';
 import 'package:trade_app/screens/auth/register.dart';
 import 'package:trade_app/screens/auth/reset_password.dart';
 import 'package:trade_app/screens/home.dart';
+
+import 'screens/auth/forgot_password.dart';
 
 void main() async {
   await setupLocator();
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         EmailVerification.route: (context) => EmailVerification(),
         HomeScreen.route: (context) => HomeScreen(),
       },
+      // home: WalletPageView(),
     );
   }
 }

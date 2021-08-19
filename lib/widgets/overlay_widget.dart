@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class OverlayWidget extends StatelessWidget {
-  final Function onTap;
+  final Function? onTap;
   final Widget child;
 
   const OverlayWidget({
-    Key key,
+    Key? key,
     this.onTap,
-    this.child,
+    required this.child,
   }) : super(key: key);
 
   @override

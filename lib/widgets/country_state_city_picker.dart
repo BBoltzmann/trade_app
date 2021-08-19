@@ -9,14 +9,14 @@ class SelectState extends StatefulWidget {
   final ValueChanged<String> onCountryChanged;
   final ValueChanged<String> onStateChanged;
   final ValueChanged<String> onCityChanged;
-  final String countryInitialValue;
-  final String cityInitialValue;
+  final String? countryInitialValue;
+  final String? cityInitialValue;
 
   const SelectState({
-    Key key,
-    this.onCountryChanged,
-    this.onStateChanged,
-    this.onCityChanged,
+    Key? key,
+   required this.onCountryChanged,
+    required this.onStateChanged,
+   required this.onCityChanged,
     this.countryInitialValue,
     this.cityInitialValue,
   }) : super(key: key);
@@ -29,9 +29,9 @@ class _SelectStateState extends State<SelectState> {
   List<String> _cities = ["City"];
   List<String> _country = ["Country"];
   String _selectedCity = "City";
-  String _selectedCountry = "Country";
+  String? _selectedCountry = "Country";
   String _selectedState = "City";
-  String _countriesData;
+  String? _countriesData;
   List<String> _states = ["City"];
   var responses;
 
@@ -43,11 +43,11 @@ class _SelectStateState extends State<SelectState> {
 
   Future getResponse() async {
     if (_countriesData?.isNotEmpty ?? false) {
-      return jsonDecode(_countriesData);
+      return jsonDecode(_countriesData!);
     }
     _countriesData = await rootBundle.loadString('assets/country.json');
     // await DefaultAssetBundle.of(context).loadString('assets/country.json');
-    return jsonDecode(_countriesData);
+    return jsonDecode(_countriesData!);
   }
 
   Future getCounty() async {
@@ -56,12 +56,12 @@ class _SelectStateState extends State<SelectState> {
       var model = StatusModel.StatusModel();
       model.name = data['name'];
       model.emoji = data['emoji'];
-      _country.add(model.emoji + "    " + model.name);
+      _country.add(model.emoji! + "    " + model.name!);
     });
     _selectedCountry = widget.countryInitialValue;
     if (widget.cityInitialValue?.isNotEmpty ?? false) {
-      _selectedCity = widget.cityInitialValue;
-      _selectedState = widget.cityInitialValue;
+      _selectedCity = widget.cityInitialValue!;
+      _selectedState = widget.cityInitialValue!;
       getState();
     }
     setState(() {});
@@ -162,7 +162,7 @@ class _SelectStateState extends State<SelectState> {
                   ),
                 );
               }).toList(),
-              onChanged: (value) => _onSelectedCountry(value),
+              onChanged: (value) => _onSelectedCountry(value!),
               value: _selectedCountry,
             ),
           ),
@@ -178,7 +178,7 @@ class _SelectStateState extends State<SelectState> {
                   child: Text(dropDownStringItem),
                 );
               }).toList(),
-              onChanged: (value) => _onSelectedState(value),
+              onChanged: (value) => _onSelectedState(value!),
               value: _selectedState,
             ),
           ),

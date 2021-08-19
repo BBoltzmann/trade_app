@@ -5,7 +5,7 @@ class AppBarWidget extends StatelessWidget {
   final String title;
   final bool leading;
 
-  AppBarWidget({this.title, this.leading});
+  AppBarWidget({required this.title,required this.leading});
   @override
   Widget build(BuildContext context) {
     return AppBar(
