@@ -34,8 +34,11 @@ dependencies:
   mvc_pattern: ^7.3.0+2
   another_flushbar: ^1.10.23
   get_it: ^7.1.3
+  image_picker: ^0.8.1+3
   google_fonts: ^2.1.0
   convex_bottom_bar: ^3.0.0
+  code_field: ^1.22.0
+  switcher_button: ^0.0.4
 
 dev_dependencies:
   flutter_test:

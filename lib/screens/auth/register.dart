@@ -26,11 +26,24 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
   String? stateValue;
   String? cityValue;
 
+  bool rememberMe = false;
+
+  void _onRememberMeChanged(bool newValue) => setState(() {
+        rememberMe = newValue;
+
+        if (rememberMe) {
+          // TODO: Here goes your functionality that remembers the user.
+        } else {
+          // TODO: Forget the user
+        }
+      });
+
   TextEditingController passwordController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         appBar: PreferredSize(
             preferredSize: const Size.fromHeight(40),
             child: AppBarWidget(
@@ -40,18 +53,12 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
         body: SingleChildScrollView(
           key: _con.scaffoldKey,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Sign Up',
-                    style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                SizedBox(height: 10),
-                Text(
-                  'We will need some of your details and location to \ncreate your WOLE account',
-                ),
+                Text('Create Account', style: TextStyle(fontSize: 25)),
                 SizedBox(height: 30),
                 Align(
                     alignment: Alignment.bottomLeft, child: Text('First Name')),
@@ -116,7 +123,23 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                   },
                   onCityChanged: (String value) {},
                 ),
-                SizedBox(height: 30),
+                SizedBox(height: 10),
+                Row(
+                  children: [
+                    Checkbox(
+                        value: rememberMe, onChanged: _onRememberMeChanged),
+                    Expanded(
+                      child: Container(
+                        child: Text(
+                            'I consent to the Privacy Policy and Terms and conditions and understand that I am opting in to be contacted by Wole, including until such time that I may choose to opt out',
+                            style: TextStyle(
+                              fontSize: 11
+                            )),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10),
                 ButtonWidget(
                     title: 'Sign up',
                     bgColor: appColor,

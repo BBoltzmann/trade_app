@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:trade_app/controllers/user_controller.dart';
 import 'package:trade_app/models/iresponse.dart';
 import 'package:trade_app/models/user.dart';
+import 'package:trade_app/screens/pages/edit_profile.dart';
 import 'package:trade_app/widgets/BrandDivider.dart';
 import 'package:trade_app/widgets/appbar_widget.dart';
 import 'package:trade_app/widgets/constants.dart';
@@ -22,6 +25,8 @@ class _ProfileScreenState extends StateMVC<ProfileScreen> {
   }
   FlutterSecureStorage storage = FlutterSecureStorage();
   OverlayEntry loader;
+  final picker = ImagePicker();
+  String _imagePath;
 
   User _user;
   final _nameField = TextEditingController();
@@ -48,253 +53,160 @@ class _ProfileScreenState extends StateMVC<ProfileScreen> {
     storage.write(key: "uid", value: _user.uuid);
   }
 
+  Future pickImageFromGallery() async {
+    final pickedFile =
+        await picker.getImage(source: ImageSource.gallery, imageQuality: 30);
+
+    if (pickedFile != null) {
+      // _userRegistration.localProfilePhotoPath = pickedFile.path;
+      print(pickedFile.path);
+      setState(() {
+        _imagePath = pickedFile.path;
+      });
+    }
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
-    _getUserProfile();
+    // _getUserProfile();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _con.scaffoldKey,
+      backgroundColor: Colors.white,
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: const Size.fromHeight(20),
           child: AppBarWidget(
             leading: true,
-            title: 'My Profile',
+            title: '',
           )),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20),
-          child: (_con.fetchingAddresses && _user == null)
-              ? Center(
-                  child: SpinKitThreeBounce(
-                  color: appColor,
-                  size: 30.0,
-                ))
-              : Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(children: [
-                      Stack(children: [
-                        Container(
-                          height: 70,
-                          width: 70,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
-                            border: Border.all(width: 2, color: Colors.grey),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(5),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(100),
-                              // child: Icon(Icons.person_add),
-                            ),
-                          ),
-                        ),
-                        Positioned.fill(
-                            child: Align(
-                          alignment: Alignment.bottomRight,
-                          child: Container(
-                            color: Colors.white,
-                            child: InkWell(
-                              onTap: () {
-                                print('tapped');
-                              },
-                              child: Icon(Icons.add_circle,
-                                  size: 25, color: appColor),
-                            ),
-                          ),
-                        ))
-                      ]),
-                      SizedBox(width: 20),
-                      Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+          child:
+              //  (_con.fetchingAddresses && _user == null)
+              //     ?
+              // Center(
+              //     child: SpinKitThreeBounce(
+              //     color: appColor,
+              //     size: 30.0,
+              //   ))
+              // :
+              Column(
+            children: [
+              Align(
+                alignment: Alignment.topRight,
+                child: FloatingActionButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => EditProfileScreen()));
+                    },
+                    child: Icon(Icons.edit, color: Colors.white),
+                    mini: true,
+                    backgroundColor: appColor,
+                    elevation: 5),
+              ),
+              Image.asset('assets/images/user_photo.png'),
+              SizedBox(height: 10),
+              Text('Celine Jones',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              SizedBox(height: 3),
+              Text('Lagos, Nigeria'),
+              SizedBox(height: 8),
+              Text('I am a trader and would love to trade with you',
+                  style: TextStyle(color: Colors.grey)),
+              SizedBox(height: 60),
+              Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+                Container(
+                    height: 100,
+                    width: 100,
+                    decoration: BoxDecoration(
+                        color: Colors.blue.withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(3)),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 4, horizontal: 8),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SizedBox(
-                              height: 50,
-                              width: 200,
-                              child: Container(
-                                child: TextField(
-                                  maxLines: null,
-                                  controller: _nameField,
-                                  decoration: InputDecoration(
-                                      border: UnderlineInputBorder(
-                                          borderSide: BorderSide.none),
-                                      hintText: 'John Doe',
-                                      hintStyle: TextStyle(color: Colors.grey)),
-                                  cursorColor: appColor,
-                                ),
-                              ),
-                            ),
-                            Text(_user.phone,
-                                style: TextStyle(color: Colors.grey))
-                          ]),
-                      Spacer(),
-                      Icon(Icons.done_outlined, color: appColor),
-                    ]),
-                    SizedBox(height: 20),
-                    BrandDivider(),
-                    SizedBox(height: 20),
-                    Text('About:',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold)),
-                    SizedBox(
-                      height: 50,
-                      width: 200,
-                      child: Container(
-                        child: TextField(
-                          maxLines: null,
-                          controller: _aboutField,
-                          decoration: InputDecoration(
-                              border: UnderlineInputBorder(
-                                  borderSide: BorderSide.none),
-                              hintText: 'Add a bio',
-                              hintStyle: TextStyle(color: Colors.grey)),
-                          cursorColor: appColor,
+                            SvgPicture.asset('assets/images/handshake.svg'),
+                            SizedBox(height: 3),
+                            Text('20',
+                                style: TextStyle(
+                                    fontSize: 16, fontFamily: 'Poppins-Bold')),
+                            SizedBox(height: 5),
+                            Text('Handshakes',
+                                style: TextStyle(
+                                    fontSize: 14, fontFamily: 'Poppins-Bold')),
+                          ],
                         ),
                       ),
-                    ),
-                    SizedBox(height: 20),
-                    BrandDivider(),
-                    BrandDivider(),
-                    SizedBox(height: 20),
-                    Row(children: [
-                      Text('Email:',
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w500)),
-                      SizedBox(width: 10),
-                      Text('kristine@example.com',
-                          style: TextStyle(fontSize: 16))
-                    ]),
-                    SizedBox(height: 10),
-                    Row(children: [
-                      Text('Location:',
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w500)),
-                      SizedBox(width: 10),
-                      Text('24 Alle Avenue, Hampton',
-                          style: TextStyle(fontSize: 16))
-                    ]),
-                    SizedBox(height: 10),
-                    Row(children: [
-                      Text('Total Trade Rate:',
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w500)),
-                      SizedBox(width: 10),
-                      Row(children: [
-                        Icon(Icons.star, color: Colors.orangeAccent),
-                        SizedBox(width: 5),
-                        Icon(Icons.star, color: Colors.orangeAccent),
-                        SizedBox(width: 5),
-                        Icon(Icons.star, color: Colors.orangeAccent),
-                        SizedBox(width: 5),
-                        Icon(Icons.star, color: Colors.orangeAccent),
-                        SizedBox(width: 5),
-                        Icon(Icons.star_outline, color: Colors.orangeAccent),
-                      ]),
-                    ]),
-                    SizedBox(height: 20),
-                    BrandDivider(),
-                    SizedBox(height: 20),
-                    Text('Trade History',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w500)),
-                    SizedBox(height: 20),
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Completed', style: TextStyle(fontSize: 16)),
-                          Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.green,
-                                  borderRadius: BorderRadius.circular(50)),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 4, horizontal: 8),
-                                child: Center(
-                                  child: Text('20',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontFamily: 'Poppins-Bold')),
-                                ),
-                              )),
-                        ]),
-                    SizedBox(height: 10),
-                    BrandDivider(),
-                    SizedBox(height: 10),
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Ongoing', style: TextStyle(fontSize: 16)),
-                          Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.orange,
-                                  borderRadius: BorderRadius.circular(50)),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 4, horizontal: 8),
-                                child: Center(
-                                  child: Text('12',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontFamily: 'Poppins-Bold')),
-                                ),
-                              )),
-                        ]),
-                    SizedBox(height: 10),
-                    BrandDivider(),
-                    SizedBox(height: 10),
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Incomplete', style: TextStyle(fontSize: 16)),
-                          Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.red,
-                                  borderRadius: BorderRadius.circular(50)),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 4, horizontal: 8),
-                                child: Center(
-                                  child: Text('2',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontFamily: 'Poppins-Bold')),
-                                ),
-                              )),
-                        ]),
-                    SizedBox(height: 10),
-                    BrandDivider(),
-                    SizedBox(height: 510),
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Dispute', style: TextStyle(fontSize: 16)),
-                          Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.red,
-                                  borderRadius: BorderRadius.circular(50)),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 4, horizontal: 8),
-                                child: Center(
-                                  child: Text('6',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontFamily: 'Poppins-Bold')),
-                                ),
-                              )),
-                        ]),
-                  ],
-                ),
+                    )),
+                SizedBox(height: 10),
+                Container(
+                    height: 100,
+                    width: 100,
+                    decoration: BoxDecoration(
+                        color: Colors.greenAccent.withOpacity(0.3),
+                        borderRadius: BorderRadius.circular(3)),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 4, horizontal: 8),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset('assets/images/ongoing.svg'),
+                            SizedBox(height: 3),
+                            Text('12',
+                                style: TextStyle(
+                                    fontSize: 16, fontFamily: 'Poppins-Bold')),
+                            SizedBox(height: 5),
+                            Text('Ongoing',
+                                style: TextStyle(
+                                    fontSize: 14, fontFamily: 'Poppins-Bold')),
+                          ],
+                        ),
+                      ),
+                    )),
+                SizedBox(height: 10),
+                Container(
+                    height: 100,
+                    width: 100,
+                    decoration: BoxDecoration(
+                        color: Colors.red.withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(3)),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 4, horizontal: 8),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset('assets/images/dispute.svg'),
+                            SizedBox(height: 3),
+                            Text('2',
+                                style: TextStyle(
+                                    fontSize: 16, fontFamily: 'Poppins-Bold')),
+                            SizedBox(height: 5),
+                            Text('Disputes',
+                                style: TextStyle(
+                                    fontSize: 14, fontFamily: 'Poppins-Bold')),
+                          ],
+                        ),
+                      ),
+                    )),
+              ]),
+            ],
+          ),
         ),
       ),
     );

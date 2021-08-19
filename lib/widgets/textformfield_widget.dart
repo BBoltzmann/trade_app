@@ -49,8 +49,11 @@ class TextFormFieldWidget extends StatelessWidget {
 
   Widget build(BuildContext context) {
     final inputBorder = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(4),
-      borderSide: BorderSide(color: AppColors.grey1, width: 0.5),
+      borderRadius: BorderRadius.circular(5),
+      borderSide: BorderSide(
+        color: Colors.grey,
+        width: 1,
+      ),
     );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
