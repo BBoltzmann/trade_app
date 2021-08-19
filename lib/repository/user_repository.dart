@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:trade_app/globalvariables.dart';
@@ -88,28 +87,29 @@ Future<IResponse<User>> userSignUp(User user) async {
   return alRes;
 }
 
-Future<IResponse<User>> getUserProfile() async {
+Future<IResponse<User>?> getUserProfile() async {
   try {
-  FlutterSecureStorage storage = getIt<FlutterSecureStorage>();
+    FlutterSecureStorage storage = getIt<FlutterSecureStorage>();
 
-  Map<String, String> headers = {
-    "content-type": "application/json",
-    "accept": "application/json",
-    "authorization": 'Bearer ${await storage.read(key: 'token')}',
-  };
+    Map<String, String> headers = {
+      "content-type": "application/json",
+      "accept": "application/json",
+      "authorization": 'Bearer ${await storage.read(key: 'token')}',
+    };
 
-  var res = await http.get(
-    Uri.parse('https://wole-api.herokuapp.com/api/User/me'),
-    headers: headers,
-  );
-  print(res.body);
-  final Map data = json.decode(res.body)['data'];
-  final alRespose = IResponse<User>.fromJson(data);
-  if (data != null && data is Map) {
-    alRespose.data = User.fromJSON(data);
-    print('--- getUserDetails success');
-  }
-  return alRespose;
+    var res = await http.get(
+      Uri.parse('https://wole-api.herokuapp.com/api/User/me'),
+      headers: headers,
+    );
+    print(res.body);
+    final Map<String, dynamic>? data = json.decode(res.body)['data'];
+
+    if (data != null && data is Map) {
+      final alRespose = IResponse<User>.fromJson(data);
+      alRespose.data = User.fromJSON(data);
+      print('--- getUserDetails success');
+      return alRespose;
+    }
   } catch (e) {
     print('--- getUserDetails error');
     print(e);

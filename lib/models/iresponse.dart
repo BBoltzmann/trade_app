@@ -1,12 +1,9 @@
 class IResponse<T> {
-  int? statusCode, uuid;
+  int? statusCode;
   T? data;
   Meta? meta;
-  int statusCode;
-  String token, message, uuid;
-  bool success, isProfileCompleted;
-  Meta meta;
-
+  String? token, message, uuid;
+  bool? success, isProfileCompleted;
 
   IResponse(
       {this.data,

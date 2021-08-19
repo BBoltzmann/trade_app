@@ -3,11 +3,11 @@ import 'package:trade_app/widgets/constants.dart';
 
 class OultineButtonWidget extends StatelessWidget {
   final String title;
-  final Function onPressed;
-  final Color textColor, bgColor;
+  final Function()? onPressed;
+  final Color? textColor, bgColor;
 
   OultineButtonWidget(
-      {this.title, this.onPressed, this.textColor, this.bgColor});
+      {required this.title, this.onPressed, this.textColor, this.bgColor});
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(

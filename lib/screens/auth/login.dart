@@ -9,6 +9,7 @@ import 'package:trade_app/screens/home.dart';
 import 'package:trade_app/widgets/appbar_widget.dart';
 import 'package:trade_app/widgets/button_widget.dart';
 import 'package:trade_app/widgets/constants.dart';
+import 'package:trade_app/widgets/size_config.dart';
 import 'package:trade_app/widgets/textformfield_widget.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -26,6 +27,7 @@ class _LoginScreenState extends StateMVC<LoginScreen> {
   }
   @override
   Widget build(BuildContext context) {
+    SizeConfig.init(context);
     return Scaffold(
         key: _con.scaffoldKey,
         backgroundColor: Colors.white,

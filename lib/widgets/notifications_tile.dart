@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:trade_app/widgets/constants.dart'; 
+import 'package:trade_app/widgets/constants.dart';
 
 class NotificationsTile extends StatelessWidget {
   String title;
 
-  NotificationsTile({this.title});
+  NotificationsTile({required this.title});
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -17,7 +17,7 @@ class NotificationsTile extends StatelessWidget {
           ),
           boxShadow: [
             BoxShadow(
-                color: Colors.grey[400],
+                color: Colors.grey.withOpacity(0.4),
                 blurRadius: 2.0,
                 spreadRadius: 0,
                 offset: Offset(0.7, 0.7)),
@@ -40,20 +40,18 @@ class NotificationsTile extends StatelessWidget {
               height: 80,
               width: 50,
               decoration: BoxDecoration(
-                  color:  appColor.withOpacity(0.2),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(1),
-                  ),
-                  // boxShadow: [
-                  //   BoxShadow(
-                  //       color: Colors.grey[400],
-                  //       blurRadius: 2.0,
-                  //       spreadRadius: 0,
-                  //       offset: Offset(0.7, 0.7))
-                  // ]
-                  
-                  ),
-                  
+                color: appColor.withOpacity(0.2),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(1),
+                ),
+                // boxShadow: [
+                //   BoxShadow(
+                //       color: Colors.grey[400],
+                //       blurRadius: 2.0,
+                //       spreadRadius: 0,
+                //       offset: Offset(0.7, 0.7))
+                // ]
+              ),
             ),
           ],
         ),

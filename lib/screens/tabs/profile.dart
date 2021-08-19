@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
@@ -8,7 +7,6 @@ import 'package:trade_app/controllers/user_controller.dart';
 import 'package:trade_app/models/iresponse.dart';
 import 'package:trade_app/models/user.dart';
 import 'package:trade_app/screens/pages/edit_profile.dart';
-import 'package:trade_app/widgets/BrandDivider.dart';
 import 'package:trade_app/widgets/appbar_widget.dart';
 import 'package:trade_app/widgets/constants.dart';
 
@@ -21,36 +19,36 @@ class _ProfileScreenState extends StateMVC<ProfileScreen> {
   UserController _con = new UserController();
 
   _ProfileScreenState() : super(UserController()) {
-    _con = controller;
+    _con = controller as UserController;
   }
   FlutterSecureStorage storage = FlutterSecureStorage();
-  OverlayEntry loader;
+  OverlayEntry? loader;
   final picker = ImagePicker();
-  String _imagePath;
+  String? _imagePath;
 
-  User _user;
+  User? _user;
   final _nameField = TextEditingController();
   final _aboutField = TextEditingController();
   final _phoneField = TextEditingController();
   final _emailField = TextEditingController();
-  String country, city;
+  String? country, city;
 
   void _getUserProfile() async {
     final IResponse<User> profileResponse = await _con.getUserProfile();
     print({'======/////////========${profileResponse.data}'});
 
-    _user = profileResponse?.data;
+    _user = profileResponse.data;
     // setState(() {});
 
     _nameField.text = '${_user?.firstname} ${_user?.lastname}';
-    _phoneField.text = _user?.phone;
+    _phoneField.text = _user?.phone ?? '';
     _emailField.text = _user?.email ?? 'example@email.com';
-    _aboutField.text = _user?.bio;
+    _aboutField.text = _user?.bio ?? '';
     country = _user?.country;
     city = _user?.city;
     setState(() {});
 
-    storage.write(key: "uid", value: _user.uuid);
+    storage.write(key: "uid", value: _user?.uuid);
   }
 
   Future pickImageFromGallery() async {

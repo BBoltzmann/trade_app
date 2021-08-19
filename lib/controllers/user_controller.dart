@@ -3,8 +3,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:trade_app/helpers/utility.dart';
 import 'package:trade_app/models/iresponse.dart';
-import 'package:trade_app/repository/user_repository.dart' as user_repo;
 import 'package:trade_app/models/user.dart';
+import 'package:trade_app/repository/user_repository.dart' as user_repo;
 import 'package:trade_app/screens/home.dart';
 import 'package:trade_app/widgets/constants.dart';
 
@@ -13,10 +13,10 @@ class UserController extends ControllerMVC {
   String? confirmedPassword;
   String? token;
 
- late GlobalKey<ScaffoldState> scaffoldKey;
- late GlobalKey<FormState> loginFormKey, registerFormKey;
- late OverlayEntry verificationOverlay, loader;
- late FlutterSecureStorage storage;
+  late GlobalKey<ScaffoldState> scaffoldKey;
+  late GlobalKey<FormState> loginFormKey, registerFormKey;
+  late OverlayEntry verificationOverlay, loader;
+  late FlutterSecureStorage storage;
   var fetchingAddresses = true;
 
   bool verificationActive = false, autoValidate = false, hidePassword = true;
@@ -43,7 +43,6 @@ class UserController extends ControllerMVC {
 
         storage.write(key: "uid", value: res.data!.uuid);
         Navigator.of(scaffoldKey.currentContext!).pushReplacementNamed(
-
           HomeScreen.route,
           arguments: 0,
         );
@@ -109,7 +108,7 @@ class UserController extends ControllerMVC {
       fetchingAddresses = true;
     });
 
-    print(res.data);
+    print(res?.data);
     return res;
   }
 

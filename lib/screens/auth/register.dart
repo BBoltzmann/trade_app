@@ -28,8 +28,8 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
 
   bool rememberMe = false;
 
-  void _onRememberMeChanged(bool newValue) => setState(() {
-        rememberMe = newValue;
+  void _onRememberMeChanged(bool? newValue) => setState(() {
+        if (newValue != null) rememberMe = newValue;
 
         if (rememberMe) {
           // TODO: Here goes your functionality that remembers the user.
@@ -132,9 +132,7 @@ class _RegisterScreenState extends StateMVC<RegisterScreen> {
                       child: Container(
                         child: Text(
                             'I consent to the Privacy Policy and Terms and conditions and understand that I am opting in to be contacted by Wole, including until such time that I may choose to opt out',
-                            style: TextStyle(
-                              fontSize: 11
-                            )),
+                            style: TextStyle(fontSize: 11)),
                       ),
                     ),
                   ],

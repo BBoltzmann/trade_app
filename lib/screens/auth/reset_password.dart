@@ -18,7 +18,7 @@ class _ResetPasswordState extends StateMVC<ResetPassword> {
   UserController _con = new UserController();
 
   _ResetPasswordState() : super(UserController()) {
-    _con = controller;
+    _con = controller as UserController;
   }
 
   @override
@@ -54,8 +54,8 @@ class _ResetPasswordState extends StateMVC<ResetPassword> {
                     borderColor: appColor,
                     // controller: passwordController,
                     obscureText: _con.hidePassword,
-                    onIconTap: () => _con.togglePasswordVisibility(),
-                    iconData: true,
+                    // onIconTap: () => _con.togglePasswordVisibility(),
+                    // iconData: true,
                     prefixIconData: _con.hidePassword
                         ? Icons.visibility
                         : Icons.visibility_off),
@@ -66,10 +66,10 @@ class _ResetPasswordState extends StateMVC<ResetPassword> {
                 SizedBox(height: 10),
                 TextFormFieldWidget(
                     borderColor: appColor,
-                    onChanged: (String input) => _con.user.password = input,
+                    //   onChanged: (String input) => _con.user.password = input,
                     obscureText: _con.hidePassword,
-                    onIconTap: () => _con.togglePasswordVisibility(),
-                    iconData: true,
+                    //  onIconTap: () => _con.togglePasswordVisibility(),
+                    // iconData: true,
                     prefixIconData: _con.hidePassword
                         ? Icons.visibility
                         : Icons.visibility_off),
