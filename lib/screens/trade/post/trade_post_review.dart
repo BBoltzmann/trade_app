@@ -10,8 +10,9 @@ import 'package:trade_app/widgets/text_widget.dart';
 class TradePostReviewScreen extends StatefulWidget {
   final File image;
   final String description;
-  
-  const TradePostReviewScreen({Key key, this.image, this.description}) : super(key: key);
+
+  const TradePostReviewScreen({Key key, this.image, this.description})
+      : super(key: key);
 
   @override
   _TradePostReviewScreenState createState() => _TradePostReviewScreenState();
@@ -77,17 +78,19 @@ class _TradePostReviewScreenState extends State<TradePostReviewScreen> {
             ),
           ),
           verticalSpace(3.92),
-          Container(
-            height: height(184),
-            width: width(334),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.r),
-            ),
-            child: Image.file(
-              widget.image,
-              fit: BoxFit.fill,
-            ),
-          ),
+          widget.image != null
+              ? Container()
+              : Container(
+                  height: height(184),
+                  width: width(334),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.r),
+                  ),
+                  child: Image.file(
+                    widget.image,
+                    fit: BoxFit.fill,
+                  ),
+                ),
           verticalSpace(7.0),
           Card(
             child: Container(

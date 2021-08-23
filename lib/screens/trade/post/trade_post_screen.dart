@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:trade_app/screens/trade/widgets/back_button.dart';
+import 'package:trade_app/screens/trade/widgets/currency_button.dart';
 import 'package:trade_app/screens/trade/widgets/trade_button.dart';
 import 'package:trade_app/screens/trade/post/trade_post_review.dart';
 import 'package:trade_app/utils/colors.dart';
@@ -20,6 +21,7 @@ class TradePostScreen extends StatefulWidget {
 }
 
 class _TradePostScreenState extends State<TradePostScreen> {
+  bool isSelected = false;
   File image = File("");
   TextEditingController description = TextEditingController();
   @override
@@ -83,7 +85,7 @@ class _TradePostScreenState extends State<TradePostScreen> {
             height: height(184),
             width: width(334),
             decoration: BoxDecoration(
-              color: searchBarGrey,
+              color: Colors.grey[200],
               borderRadius: BorderRadius.circular(10.r),
             ),
             child: image.path == ""
@@ -205,23 +207,134 @@ class _TradePostScreenState extends State<TradePostScreen> {
               ),
             ),
           ),
-          // verticalSpace(16),
-          // Container(
-          //   padding: EdgeInsets.symmetric(horizontal: 20.w),
-          //   height: height(80),
-          //   child: Row(
-          //     children: [
-          //       Column(
-          //         children: [
-          //           CustomText("Amount (NGN)", fontSize: 14,),
-
-          //         ],
-          //       )
-          //     ],
-          //   ),
-          // )
+          verticalSpace(16),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            height: height(80),
+            child: Row(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomText(
+                      "Amount (NGN)",
+                      fontSize: 14,
+                    ),
+                    verticalSpace(4),
+                    Container(
+                      height: 48.h,
+                      width: 250.w,
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: back_arrow_grey),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: back_arrow_grey),
+                          ),
+                          suffixIcon: IconButton(
+                            icon: ImageIcon(
+                              AssetImage("assets/images/drop_down_arrow.png"),
+                            ),
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) => SimpleDialog(
+                                  children: [
+                                    ListTile(
+                                      selected: isSelected,
+                                      selectedTileColor: paleBlueDark,
+                                      title: CustomText("NGN (Nigeria)",
+                                          textColor: black,
+                                          fontSize: 14,
+                                          weight: FontWeight.w700),
+                                      onTap: () {
+                                        print(isSelected);
+                                        setState(() {
+                                          isSelected = !isSelected;
+                                        });
+                                      },
+                                    ),
+                                    GestureDetector(
+                                      onTap: (){
+                                        isSelected = !isSelected;
+                                      },
+                                      child: ListTile(
+                                        selected: isSelected,
+                                        selectedTileColor: paleBlueDark,
+                                        title: CustomText("Euro (European Union)",
+                                            textColor: black,
+                                            fontSize: 14,
+                                            weight: FontWeight.w700),
+                                        onTap: () {
+                                    
+                                        },
+                                      ),
+                                    ),
+                                    ListTile(
+                                      selected: isSelected,
+                                      selectedTileColor: paleBlueDark,
+                                      title: CustomText(
+                                        "Lira (Turkish)",
+                                        textColor: black,
+                                        fontSize: 14,
+                                        weight: FontWeight.w700,
+                                      ),
+                                      onTap: () {
+                                        setState(() {
+                                          isSelected = !isSelected;
+                                        });
+                                      },
+                                    ),
+                                    ListTile(
+                                      selected: isSelected,
+                                      selectedTileColor: paleBlueDark,
+                                      title: CustomText("Dollar (US)",
+                                          textColor: black,
+                                          fontSize: 14,
+                                          weight: FontWeight.w700),
+                                      onTap: () {
+                                        setState(() {
+                                          isSelected = !isSelected;
+                                        });
+                                      },
+                                    ),
+                                    ListTile(
+                                      selected: isSelected,
+                                      selectedTileColor: paleBlueDark,
+                                      title: CustomText("USDT",
+                                          textColor: black,
+                                          fontSize: 14,
+                                          weight: FontWeight.w700),
+                                      onTap: () {
+                                        setState(() {
+                                          isSelected = !isSelected;
+                                        });
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          )
         ],
       ),
     );
   }
 }
+
+// List<String> currencies = [
+//   "NGN (Nigeria)",
+//   "Euro (European Union)",
+//   "Lira (Turkish)",
+//   "Dollar (US)",
+//   "USDT"
+// ];

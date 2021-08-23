@@ -8,7 +8,9 @@ import 'package:trade_app/screens/auth/onboarding.dart';
 import 'package:trade_app/screens/auth/register.dart';
 import 'package:trade_app/screens/auth/reset_password.dart';
 import 'package:trade_app/screens/reports/report_homepage.dart';
+import 'package:trade_app/screens/trade/chat/trade_chat.dart';
 import 'package:trade_app/screens/trade/network/UI/trade_home.dart';
+import 'package:trade_app/screens/trade/post/trade_post_screen.dart';
 
 void main() async {
   setupLocator();
@@ -29,7 +31,7 @@ class MyApp extends StatelessWidget {
       builder: () => MaterialApp(
         debugShowCheckedModeBanner: false,
         // initialRoute: LoginScreen.route,
-        home: TradeHome(),
+        home: TradePostScreen(),
         // routes: {
         //   OnboardingScreen.route: (context) => OnboardingScreen(),
         //   LoginScreen.route: (context) => LoginScreen(),

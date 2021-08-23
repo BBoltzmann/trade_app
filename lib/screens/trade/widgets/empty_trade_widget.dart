@@ -4,20 +4,22 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:trade_app/widgets/text_widget.dart';
 
 class EmptyTradeBaloon extends StatelessWidget {
-  const EmptyTradeBaloon({Key key}) : super(key: key);
+  final String text;
+  final double height, width;
+  const EmptyTradeBaloon(this.text, {Key key, this.height = 92, this.width = 239}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 16),
-      height: 92.h,
-      width: 239.w,
+      height: height.h,
+      width: width.w,
       decoration: BoxDecoration(
         color: baloonColor,
         borderRadius: BorderRadius.circular(8.r),
       ),
       child: Center(
-        child: CustomText("You currently do not have any trades. Create a TRADE or contact a trader to make trade records.", textColor: yellow,)
+        child: CustomText(text, textColor: yellow,)
       ),
     );
   }
