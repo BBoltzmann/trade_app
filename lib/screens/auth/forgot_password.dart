@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:trade_app/screens/auth/email_verification.dart';
-import 'package:trade_app/screens/auth/reset_password.dart';
+import 'package:trade_app/utils/constants.dart';
 import 'package:trade_app/widgets/appbar_widget.dart';
 import 'package:trade_app/widgets/button_widget.dart';
-import 'package:trade_app/widgets/constants.dart';
 import 'package:trade_app/widgets/textformfield_widget.dart';
 
 class ForgotPassword extends StatefulWidget {

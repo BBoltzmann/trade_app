@@ -4,7 +4,7 @@ import 'package:trade_app/controllers/user_controller.dart';
 import 'package:trade_app/helpers/utility.dart';
 import 'package:trade_app/widgets/appbar_widget.dart';
 import 'package:trade_app/widgets/button_widget.dart';
-import 'package:trade_app/widgets/constants.dart';
+import 'package:trade_app/utils/constants.dart';
 import 'package:trade_app/widgets/country_state_city_picker.dart';
 import 'package:trade_app/widgets/textformfield_widget.dart';
 

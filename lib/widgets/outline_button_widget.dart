@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trade_app/widgets/constants.dart';
+import 'package:trade_app/utils/constants.dart';
 
 class OultineButtonWidget extends StatelessWidget {
   final String title;

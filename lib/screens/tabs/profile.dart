@@ -7,8 +7,8 @@ import 'package:trade_app/controllers/user_controller.dart';
 import 'package:trade_app/models/iresponse.dart';
 import 'package:trade_app/models/user.dart';
 import 'package:trade_app/screens/pages/edit_profile.dart';
+import 'package:trade_app/utils/constants.dart';
 import 'package:trade_app/widgets/appbar_widget.dart';
-import 'package:trade_app/widgets/constants.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override

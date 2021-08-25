@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:trade_app/controllers/user_controller.dart';
 import 'package:trade_app/screens/auth/login.dart';
+import 'package:trade_app/utils/constants.dart';
 import 'package:trade_app/widgets/appbar_widget.dart';
 import 'package:trade_app/widgets/button_widget.dart';
-import 'package:trade_app/widgets/constants.dart';
 import 'package:trade_app/widgets/textformfield_widget.dart';
 
 class ResetPassword extends StatefulWidget {

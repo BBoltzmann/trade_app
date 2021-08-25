@@ -6,7 +6,7 @@ import 'package:trade_app/models/iresponse.dart';
 import 'package:trade_app/models/user.dart';
 import 'package:trade_app/repository/user_repository.dart' as user_repo;
 import 'package:trade_app/screens/home.dart';
-import 'package:trade_app/widgets/constants.dart';
+import 'package:trade_app/utils/constants.dart';
 
 class UserController extends ControllerMVC {
   User user = new User();

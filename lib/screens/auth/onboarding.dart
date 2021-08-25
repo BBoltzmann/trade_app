@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:trade_app/screens/auth/login.dart';
 import 'package:trade_app/screens/auth/register.dart';
+import 'package:trade_app/utils/constants.dart';
 import 'package:trade_app/widgets/button_widget.dart';
-import 'package:trade_app/widgets/constants.dart';
 import 'package:trade_app/widgets/outline_button_widget.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -90,10 +89,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                       builder: (context) => LoginScreen())),
                               title: 'Login',
                               textColor: appColor),
-                          ButtonWidget( onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => RegisterScreen())),
+                          ButtonWidget(
+                              onPressed: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => RegisterScreen())),
                               bgColor: appColor,
                               title: 'Sign up',
                               textColor: Colors.white),

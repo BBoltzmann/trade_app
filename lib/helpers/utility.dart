@@ -1,15 +1,14 @@
-import 'dart:convert';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:trade_app/screens/auth/login.dart';
-import 'package:trade_app/widgets/constants.dart';
+import 'package:trade_app/utils/constants.dart';
 import 'package:trade_app/widgets/overlay_widget.dart';
 
 class Utility {
- late  BuildContext context;
+  late BuildContext context;
   Utility.of(BuildContext _context) {
     this.context = _context;
   }
@@ -46,17 +45,14 @@ class Utility {
     MessageTypes type = MessageTypes.info,
     Duration? duration,
   }) {
-    IconData getIndicatorData(){
-      return (type == MessageTypes.error)
-          ? Icons.warning
-          : Icons.info_outline;
-
+    IconData getIndicatorData() {
+      return (type == MessageTypes.error) ? Icons.warning : Icons.info_outline;
     }
+
     Flushbar(
       margin: EdgeInsets.all(10),
       borderRadius: new BorderRadius.circular(10),
-      icon: Icon(
-          iconData ?? getIndicatorData(),   color: Colors.white),
+      icon: Icon(iconData ?? getIndicatorData(), color: Colors.white),
       message: message ??
           (type == MessageTypes.error ? 'An Error occurred.' : 'Loading...'),
       duration: duration ?? Duration(seconds: 2),

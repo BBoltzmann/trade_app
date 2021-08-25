@@ -1,12 +1,9 @@
 import 'package:code_field/code_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:trade_app/screens/auth/login.dart';
 import 'package:trade_app/screens/auth/reset_password.dart';
+import 'package:trade_app/utils/constants.dart';
 import 'package:trade_app/widgets/appbar_widget.dart';
 import 'package:trade_app/widgets/button_widget.dart';
-import 'package:trade_app/widgets/constants.dart';
-import 'package:trade_app/widgets/textformfield_widget.dart';
 
 class EmailVerification extends StatefulWidget {
   static const String route = 'EmailVerification';
@@ -41,7 +38,6 @@ class _EmailVerificationState extends State<EmailVerification> {
                 Text(
                     'Please enter the verification code sent to your email address'),
                 SizedBox(height: 20),
-                
                 InputCodeField(
                   control: codeControl,
                   count: 6,

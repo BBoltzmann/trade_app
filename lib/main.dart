@@ -6,6 +6,7 @@ import 'package:trade_app/screens/auth/onboarding.dart';
 import 'package:trade_app/screens/auth/register.dart';
 import 'package:trade_app/screens/auth/reset_password.dart';
 import 'package:trade_app/screens/home.dart';
+import 'package:trade_app/utils/colors.dart';
 
 import 'screens/auth/forgot_password.dart';
 
@@ -19,7 +20,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: OnboardingScreen.route,
+      theme: ThemeData(
+        scaffoldBackgroundColor: AppColors.appWhite,
+      ),
+      initialRoute: HomeScreen.route,
       routes: {
         OnboardingScreen.route: (context) => OnboardingScreen(),
         LoginScreen.route: (context) => LoginScreen(),

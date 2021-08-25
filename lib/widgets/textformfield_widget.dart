@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:trade_app/utils/colors.dart';
+import 'package:trade_app/utils/constants.dart';
 import 'package:trade_app/utils/ui_helpers.dart';
 import 'package:trade_app/widgets/app_text.dart';
-import 'package:trade_app/widgets/constants.dart';
 import 'package:trade_app/widgets/size_config.dart';
 
 class TextFormFieldWidget extends StatelessWidget {
@@ -51,8 +51,8 @@ class TextFormFieldWidget extends StatelessWidget {
     final inputBorder = OutlineInputBorder(
       borderRadius: BorderRadius.circular(5),
       borderSide: BorderSide(
-        color: Colors.grey,
-        width: 1,
+        color: borderColor ?? AppColors.grey1,
+        width: 0.5,
       ),
     );
     return Column(
@@ -87,7 +87,7 @@ class TextFormFieldWidget extends StatelessWidget {
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(4),
               borderSide: BorderSide(
-                color: AppColors.grey1,
+                color: borderColor ?? AppColors.grey1,
                 width: 0.5,
               ),
             ),
