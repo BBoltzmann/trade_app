@@ -8,6 +8,7 @@ import 'package:trade_app/screens/tabs/trade.dart';
 import 'package:trade_app/screens/wallet/wallet_page_view.dart';
 import 'package:trade_app/utils/colors.dart';
 import 'package:trade_app/utils/constants.dart';
+import 'package:trade_app/utils/ui_helpers.dart';
 import 'package:trade_app/widgets/app_text.dart';
 import 'package:trade_app/widgets/size_config.dart';
 
@@ -85,16 +86,24 @@ class _HomeScreenState extends State<HomeScreen>
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return Scaffold(
-      drawer: Drawer(
+      drawer: Container(
+        color: AppColors.appWhite,
+        padding: appPadding(top: 56, left: 20, right: 20),
+        width: SizeConfig.width(231),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             IconButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon(Icons.close),
+              icon: Icon(
+                Icons.close,
+              ),
             ),
+            UIHelper.customVerticalSpace(30),
             Container(
+              width: double.infinity,
               decoration: BoxDecoration(
                 color: AppColors.appWhite,
                 boxShadow: [
@@ -107,23 +116,52 @@ class _HomeScreenState extends State<HomeScreen>
                 borderRadius: BorderRadius.circular(4),
               ),
               height: SizeConfig.height(68),
-              child: Column(
+              child: Row(
                 children: [
-                  SimpleText(
-                    'Hello Celine',
-                    size: 18,
-                    weight: FontWeight.w700,
-                    color: AppColors.appBlackVariant2,
+                  Padding(
+                    padding: appPadding(left: 20, top: 8, bottom: 2),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SimpleText(
+                          'Hello Celine',
+                          size: 18,
+                          weight: FontWeight.w700,
+                          color: AppColors.appBlackVariant2,
+                        ),
+                        SimpleText(
+                          'View Profile',
+                          size: 12,
+                          weight: FontWeight.w400,
+                          color: AppColors.primaryMain50,
+                        ),
+                      ],
+                    ),
                   ),
-                  SimpleText(
-                    'View Profile',
-                    size: 12,
-                    weight: FontWeight.w400,
-                    color: AppColors.primaryMain50,
+                  Spacer(),
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.chevron_right,
+                      color: AppColors.appBlackVariant2,
+                    ),
                   ),
                 ],
               ),
             ),
+            UIHelper.customVerticalSpace(30),
+            DrawerMenuRow(icon: ImageIcon(creditCardIcon), label: 'Wallet'),
+            DrawerMenuRow(
+                icon: Image(
+                  image: faqIcon,
+                  width: SizeConfig.width(22),
+                ),
+                label: 'FAQs'),
+            DrawerMenuRow(icon: ImageIcon(settingsIcon), label: 'Settings'),
+            DrawerMenuRow(icon: ImageIcon(aboutIcon), label: 'About Us'),
+            DrawerMenuRow(icon: ImageIcon(contactIcon), label: 'Contact Us'),
+            DrawerMenuRow(icon: ImageIcon(logoutIcon), label: 'Log Out'),
           ],
         ),
       ),
@@ -173,10 +211,26 @@ class _HomeScreenState extends State<HomeScreen>
 }
 
 class DrawerMenuRow extends StatelessWidget {
-  const DrawerMenuRow({Key? key}) : super(key: key);
-
+  const DrawerMenuRow({Key? key, required this.icon, required this.label})
+      : super(key: key);
+  final Widget icon;
+  final String label;
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Padding(
+      padding: appPadding(bottom: 30),
+      child: Row(
+        children: [
+          icon,
+          UIHelper.customHorizontalSpace(28),
+          SimpleText(
+            label,
+            size: 13,
+            color: AppColors.appBlackVariant2,
+            weight: FontWeight.w400,
+          ),
+        ],
+      ),
+    );
   }
 }
