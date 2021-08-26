@@ -1,22 +1,26 @@
 class IResponse<T> {
-  int statusCode, uuid;
-  String token, message;
-  T data;
-  bool success;
-  Meta meta;
+  int? statusCode;
+  T? data;
+  Meta? meta;
+  String? token, message, uuid;
+  bool? success, isProfileCompleted;
 
   IResponse(
       {this.data,
       this.token,
       this.message,
       this.uuid,
+      this.isProfileCompleted,
       this.success,
       this.statusCode});
 
-  IResponse.fromJson(Map<String, dynamic> json, {T data}) {
+  IResponse.fromJson(Map<String, dynamic> json, {T? data}) {
     this.data = data;
     message = json['message'];
     success = json['success'];
+    token = json['token'];
+    uuid = json['userId'];
+    isProfileCompleted = json['isProfileCompleted'];
     meta = json['meta'] != null ? Meta.fromJson(json['meta']) : null;
   }
 
@@ -25,8 +29,9 @@ class IResponse<T> {
     map["data"] = data;
     map["token"] = token;
     map["message"] = message;
-    map["user_id"] = uuid;
+    map["userId"] = uuid;
     map["success"] = success;
+    map["isProfileCompleted"] = isProfileCompleted;
     map["status_code"] = statusCode;
     return map;
   }
@@ -39,12 +44,12 @@ class IResponse<T> {
 }
 
 class Meta {
-  int count;
-  int perPage;
-  int currentPage;
-  int totalPages;
-  String next;
-  String previous;
+  int? count;
+  int? perPage;
+  int? currentPage;
+  int? totalPages;
+  String? next;
+  String? previous;
 
   Meta({
     this.count,

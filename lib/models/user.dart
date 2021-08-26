@@ -1,10 +1,11 @@
 class User {
-  String email,
+  String? email,
       phone,
       password,
       uuid,
       firstname,
       lastname,
+      bio,
       country,
       state,
       city;
@@ -16,8 +17,9 @@ class User {
       email = jsonMap['email'];
       phone = jsonMap['phoneNumber'];
       uuid = jsonMap['id'].toString();
-      firstname = jsonMap['firstname'];
-      lastname = jsonMap['lastname'];
+      firstname = jsonMap['firstName'];
+      lastname = jsonMap['lastName'];
+      bio = jsonMap['about'];
       state = jsonMap['state'];
       country = jsonMap['country'];
       city = jsonMap['city'];
@@ -36,6 +38,7 @@ class User {
     map["id"] = uuid.toString();
     map["firstname"] = firstname;
     map["lastname"] = lastname;
+    map["about"] = bio;
     map["city"] = city;
     map["country"] = country;
     map["state"] = state;

@@ -8,7 +8,7 @@ import 'package:trade_app/widgets/constants.dart';
 import 'package:trade_app/widgets/overlay_widget.dart';
 
 class Utility {
-  BuildContext context;
+ late  BuildContext context;
   Utility.of(BuildContext _context) {
     this.context = _context;
   }
@@ -40,19 +40,22 @@ class Utility {
 
   static showMessage(
     BuildContext context, {
-    String message,
-    IconData iconData,
-    MessageTypes type,
-    Duration duration,
+    String? message,
+    IconData? iconData,
+    MessageTypes type = MessageTypes.info,
+    Duration? duration,
   }) {
+    IconData getIndicatorData(){
+      return (type == MessageTypes.error)
+          ? Icons.warning
+          : Icons.info_outline;
+
+    }
     Flushbar(
       margin: EdgeInsets.all(10),
       borderRadius: new BorderRadius.circular(10),
       icon: Icon(
-          iconData ?? type == MessageTypes.error
-              ? Icons.warning
-              : Icons.info_outline,
-          color: Colors.white),
+          iconData ?? getIndicatorData(),   color: Colors.white),
       message: message ??
           (type == MessageTypes.error ? 'An Error occurred.' : 'Loading...'),
       duration: duration ?? Duration(seconds: 2),
@@ -61,7 +64,7 @@ class Utility {
 
   static OverlayEntry showOverlay(BuildContext context, Widget child) {
     OverlayEntry entry = OverlayEntry(builder: (BuildContext context) => child);
-    Overlay.of(context).insert(entry);
+    Overlay.of(context)!.insert(entry);
     return entry;
   }
 

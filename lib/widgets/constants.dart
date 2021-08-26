@@ -5,4 +5,5 @@ enum MessageTypes {
   error,
 }
 
-const Color appColor = Color(0xff182CE4);
+Color appColor = Color(0xff0062B8);
+
